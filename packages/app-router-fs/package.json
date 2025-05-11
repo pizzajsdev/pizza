@@ -37,12 +37,10 @@
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
+    "@react-router/dev": "^7.6.0",
     "@types/node": "^22.15.17",
     "publint": "^0.3.12",
     "tsup": "^8.4.0",
     "typescript": "^5.8.3"
-  },
-  "peerDependencies": {
-    "@react-router/dev": "^7.6.0"
   }
 }
