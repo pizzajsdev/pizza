@@ -1,5 +1,10 @@
 name: 'Setup project'
 description: 'Sets up project and its dependencies'
+env:
+  APP_CI: true
+  APP_ENV: development
+  NODE_VERSION: 24.5.0
+  PNPM_VERSION: 10.14.0
 runs:
   using: 'composite'
   steps:
@@ -17,6 +22,6 @@ runs:
 
     - shell: bash
       run: |
-        pnpm env use --global 22
+        pnpm env use --global 24
         pnpm install -g bun@latest
         pnpm install --frozen-lockfile

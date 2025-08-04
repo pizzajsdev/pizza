@@ -5,12 +5,6 @@ on:
     branches:
       - main
 
-env:
-  APP_CI: true
-  APP_ENV: development
-  NODE_VERSION: 22.15.0
-  PNPM_VERSION: 10.9.0
-
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
