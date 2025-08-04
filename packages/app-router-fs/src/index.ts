@@ -80,6 +80,10 @@ export class FileSystemRouter {
     parentLayoutFile: string | null = null,
   ): RouteDefinition[] {
     const routesDir = path.join(this.cwd, dir)
+    if (!fs.existsSync(routesDir)) {
+      throw new Error(`[app-router-fs] Routes directory not found: ${routesDir}`)
+    }
+
     const entries = fs.readdirSync(routesDir, { withFileTypes: true })
     const routes: RouteDefinition[] = []
     let layoutFile: string | null = parentLayoutFile

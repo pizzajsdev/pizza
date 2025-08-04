@@ -2,6 +2,7 @@ import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
   test: {
-    workspace: ['packages/*'],
+    projects: ['packages/*'],
+    exclude: ['**/build/**', '**/dist/**', '**/node_modules/**', '**/.react-router/**', '**/.local/**'],
   },
 })
