@@ -25,9 +25,9 @@
     "dist"
   ],
   "scripts": {
-    "build": "rm -rf dist && tsup --clean",
+    "build": "rm -rf dist && tsdown --clean",
     "postbuild": "publint",
-    "dev": "tsup --watch",
+    "dev": "tsdown --watch",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -36,9 +36,10 @@
     "zod": "^4.0.14"
   },
   "devDependencies": {
+    "@oxc-project/runtime": "^0.80.0",
     "@types/node": "^24.2.0",
     "publint": "^0.3.12",
-    "tsup": "^8.5.0",
+    "tsdown": "^0.13.3",
     "typescript": "^5.9.2"
   }
 }

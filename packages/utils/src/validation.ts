@@ -11,7 +11,7 @@ export function zodErrorSummarize(error: z.ZodError | unknown): string {
 
   return (
     'The following errors occurred: ' +
-    error.errors.map((err) => `${err.path.join('.')}: ${err.message}`).join('. ') +
+    error.issues.map((err) => `${err.path.join('.')}: ${err.message}`).join('. ') +
     '.'
   )
 }

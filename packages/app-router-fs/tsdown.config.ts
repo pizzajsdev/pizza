@@ -1,7 +1,7 @@
-import { type Options, defineConfig } from 'tsup'
+import { type Options, defineConfig } from 'tsdown'
 
 const config: Options = {
-  entry: ['./src/**/!(*.test).ts', './src/**/!(*.test).tsx'],
+  entry: ['./src/**/!(*.test).ts'],
   outDir: './dist',
   format: ['esm'],
   target: 'es2020',
@@ -11,10 +11,11 @@ const config: Options = {
   bundle: false,
   dts: true,
   sourcemap: true,
-  splitting: true,
   treeshake: true,
   skipNodeModulesBundle: true,
   external: ['node_modules'],
+  // @ts-expect-error - splitting is not supported by tsdown yet, but it's WIP
+  splitting: true,
 }
 
 export default defineConfig([config])
