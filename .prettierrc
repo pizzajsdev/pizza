@@ -2,5 +2,6 @@
   "printWidth": 100,
   "semi": false,
   "singleQuote": true,
-  "useTabs": false
+  "useTabs": false,
+  "proseWrap": "always"
 }
