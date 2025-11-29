@@ -7,15 +7,15 @@ This guide will help you get started.
 We develop PizzaJS using [pnpm](https://pnpm.io) on Node 24.
 
 If you're using [VS Code](https://code.visualstudio.com/), we recommend installing the
-[`node:test runner` extension](https://marketplace.visualstudio.com/items?itemName=connor4312.nodejs-testing)
-for a smooth testing experience.
+[`node:test runner` extension](https://marketplace.visualstudio.com/items?itemName=connor4312.nodejs-testing) for a
+smooth testing experience.
 
 Once that's set up, run `pnpm install` to get all the project dependencies.
 
 ## Testing
 
-All tests run directly from source. This makes it easy to use breakpoint debugging when running
-tests. This also means you should not need to run a build before running the tests.
+All tests run directly from source. This makes it easy to use breakpoint debugging when running tests. This also means
+you should not need to run a build before running the tests.
 
 ```sh
 # Run all tests
@@ -39,17 +39,16 @@ All packages are published with TypeScript types along with both ESM and CJS mod
 
 ## Making Changes
 
-Packages live in the [`packages` directory](https://github.com/pizzajsdev/pizza/tree/main/packages).
-At a minimum, each package includes:
+Packages live in the [`packages` directory](https://github.com/pizzajsdev/pizza/tree/main/packages). At a minimum, each
+package includes:
 
 - `CHANGELOG.md`: A log of what's changed
 - `package.json`: Package metadata and dependencies
 - `README.md`: Information about the package
 - `src/`: The package's source code
 
-When you make changes to a package, please make sure you add a few relevant tests and run the whole
-test suite to make sure everything still works. Then, add a human-friendly description of your
-change in the changelog and
+When you make changes to a package, please make sure you add a few relevant tests and run the whole test suite to make
+sure everything still works. Then, add a human-friendly description of your change in the changelog and
 [make a pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request).
 We will take a look at it as soon as we can.
 
@@ -62,16 +61,15 @@ Cutting releases is a 2-step process:
 
 This repo includes a script for each step.
 
-To update versions and create a tag, use `pnpm run tag-release <packageName> <releaseType>`. For
-example, to create a `minor` release of the `route-collector` package, run:
+To update versions and create a tag, use `pnpm run tag-release <packageName> <releaseType>`. For example, to create a
+`minor` release of the `route-collector` package, run:
 
 ```sh
 pnpm run tag-release route-collector minor
 ```
 
-To publish the release you just tagged, use `pnpm run publish-release <tag>`. For example, if the
-tag that was created in the previous step was `route-collector@1.0.0`, you'd run
-`pnpm run publish-release route-collector@1.0.0`.
+To publish the release you just tagged, use `pnpm run publish-release <tag>`. For example, if the tag that was created
+in the previous step was `route-collector@1.0.0`, you'd run `pnpm run publish-release route-collector@1.0.0`.
 
 The publish step runs in GitHub Actions if you just push the tag to GitHub:
 

@@ -4,10 +4,7 @@ import { fileURLToPath } from 'node:url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
-export const packagesDir = path.relative(
-  process.cwd(),
-  path.resolve(__dirname, '..', '..', 'packages'),
-)
+export const packagesDir = path.relative(process.cwd(), path.resolve(__dirname, '..', '..', 'packages'))
 
 /** @type () => string[] */
 export function getAllPackageNames() {

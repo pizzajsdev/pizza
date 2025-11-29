@@ -58,13 +58,11 @@ export default [
         },
         {
           selector: 'MethodDefinition[accessibility]',
-          message:
-            "Use native methods: omit 'public'; for private behavior use '#private' fields/methods.",
+          message: "Use native methods: omit 'public'; for private behavior use '#private' fields/methods.",
         },
         {
           selector: 'TSParameterProperty[accessibility]',
-          message:
-            "Avoid TS parameter properties; declare fields explicitly and use '#private' when needed.",
+          message: "Avoid TS parameter properties; declare fields explicitly and use '#private' when needed.",
         },
       ],
 

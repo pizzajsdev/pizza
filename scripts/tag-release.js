@@ -90,12 +90,8 @@ for (let { packageName, releaseType } of inputs) {
 
 // 3) Commit and create one tag per release
 let commitTitle =
-  releases.length === 1
-    ? `Release ${releases[0].tag}`
-    : `Release ${releases.map((r) => r.tag).join(', ')}`
-let commitBody = releases
-  .map((r) => `- ${r.packageName}: ${r.currentVersion} -> ${r.nextVersion}`)
-  .join('\n')
+  releases.length === 1 ? `Release ${releases[0].tag}` : `Release ${releases.map((r) => r.tag).join(', ')}`
+let commitBody = releases.map((r) => `- ${r.packageName}: ${r.currentVersion} -> ${r.nextVersion}`).join('\n')
 
 logAndExec(`git commit -m "${commitTitle}" -m "${commitBody}"`)
 

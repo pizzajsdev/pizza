@@ -213,9 +213,7 @@ export class FileSystemRouter {
     return routes
   }
 
-  #getRoutesAsTable(
-    routes: RouteDefinition[],
-  ): { route: string; filename: string; layout: string }[] {
+  #getRoutesAsTable(routes: RouteDefinition[]): { route: string; filename: string; layout: string }[] {
     return routes.flatMap((r) => {
       if (r.isLayout) {
         return this.#getRoutesAsTable(r.siblings)

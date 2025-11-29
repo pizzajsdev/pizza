@@ -1,9 +1,5 @@
 import { type RouteConfig, index, layout, route } from '@react-router/dev/routes'
-import {
-  type RouteDefinition,
-  type FileSystemRouterOptions,
-  collectRoutes as collectRoutesBase,
-} from './fs.ts'
+import { type RouteDefinition, type FileSystemRouterOptions, collectRoutes as collectRoutesBase } from './fs.ts'
 
 function createRouterConfig(routes: RouteDefinition[]): Awaited<RouteConfig> {
   return routes.map((routeDef) => {

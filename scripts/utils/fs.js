@@ -21,9 +21,7 @@ export function readFile(filename, encoding = 'utf-8') {
 
 /** @type (error: unknown) => error is { code: string } */
 function isFsError(error) {
-  return (
-    typeof error === 'object' && error != null && 'code' in error && typeof error.code === 'string'
-  )
+  return typeof error === 'object' && error != null && 'code' in error && typeof error.code === 'string'
 }
 
 /** @type (filename: string, data: string) => void */
