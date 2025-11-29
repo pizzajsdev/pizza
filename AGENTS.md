@@ -15,7 +15,7 @@
 - **Monorepo**: pnpm workspace with packages in `packages/` directory
 - **Key packages**: route-collector
 - **Package exports**: All `exports` in `package.json` have a dedicated file in `src` that defines the public API by
-  re-exporting from within `src/lib`
+  re-exporting from `src` or from files within `src/lib` (for more granular exports).
 - **Philosophy**: Web standards-first, runtime-agnostic (Node.js, Bun, Deno, Cloudflare Workers). Use Web Streams API,
   Uint8Array, Web Crypto API, Blob/File instead of Node.js APIs
 - **Tests run from source** (no build required), using Node.js test runner
