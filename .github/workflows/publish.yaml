@@ -55,6 +55,10 @@ jobs:
 
       - name: Publish to npm
         run: pnpm publish --filter "${{ steps.parse_tag.outputs.package_name }}" --access public --no-git-checks
+        env:
+          # this project is configured to use the Github Package Registry, to use npm you need to use a token generated in npmjs.com
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Create GitHub Release
         run: node ./scripts/create-github-release.js ${{ github.ref_name }}
