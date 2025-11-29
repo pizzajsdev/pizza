@@ -1,1 +1,1 @@
-export { createRouteConfig } from './lib/adapters/react-router.ts'
+export { collectRoutes } from './lib/react-router.ts'

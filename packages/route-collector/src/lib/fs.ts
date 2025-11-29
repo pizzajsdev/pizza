@@ -15,15 +15,30 @@ export type RouteDefinition =
       siblings: RouteDefinition[]
     }
 
+export type FileSystemRouterOptions = {
+  projectRoot?: string
+  routesDir?: string
+  fileExtensions?: string[]
+  ignoredPaths?: string[]
+  ignoredPathPrefix?: string
+  mdxRendererFile?: string
+}
+
 export class FileSystemRouter {
   #fileExts: string[]
   #fileExtsMatcher: string
-  #cwd: string
+  #projectRoot: string
+  #ignoredPaths: string[]
+  #ignoredPathPrefix: string
+  #mdxRendererFile: string | undefined
 
-  constructor(fileExts: string[] = ['.tsx', '.ts'], cwd?: string) {
-    this.#fileExts = fileExts
-    this.#fileExtsMatcher = `(${fileExts.map((ext) => ext.replace('.', '')).join('|')})`
-    this.#cwd = cwd ?? process.cwd()
+  constructor(options: FileSystemRouterOptions) {
+    this.#fileExts = (options.fileExtensions ?? ['.tsx', '.ts']).map((ext) => ext.toLowerCase())
+    this.#fileExtsMatcher = `(${this.#fileExts.map((ext) => ext.replace('.', '')).join('|')})`
+    this.#projectRoot = options.projectRoot ?? process.cwd()
+    this.#ignoredPaths = options.ignoredPaths ?? []
+    this.#ignoredPathPrefix = options.ignoredPathPrefix ?? '_'
+    this.#mdxRendererFile = options.mdxRendererFile
   }
 
   #isSupportedFile(filename: string): boolean {
@@ -47,7 +62,7 @@ export class FileSystemRouter {
   }
 
   #isIgnoredPath(filename: string): boolean {
-    return filename.startsWith('_')
+    return filename.startsWith(this.#ignoredPathPrefix) || this.#ignoredPaths.includes(filename)
   }
 
   #isGrouping(filename: string): boolean {
@@ -87,12 +102,27 @@ export class FileSystemRouter {
     return routePath
   }
 
+  #isMdxFile(filename: string): boolean {
+    return filename.toLowerCase().endsWith('.mdx') || filename.toLowerCase().endsWith('.md')
+  }
+
+  #safeLayoutFile(layoutFile: string): string {
+    if (this.#isMdxFile(layoutFile)) {
+      throw new Error(
+        `Markdown Layout files are not supported: ${layoutFile}.` +
+          'If your intention was to create a route with a layout/ path segment, ' +
+          `use ./layout/index.mdx instead.`,
+      )
+    }
+    return layoutFile
+  }
+
   collectRoutes(
     dir: string = 'app/routes',
     basePath: string = '',
     parentLayoutFile: string | null = null,
   ): RouteDefinition[] {
-    let routesDir = path.join(this.#cwd, dir)
+    let routesDir = path.join(this.#projectRoot, dir)
     if (!fs.existsSync(routesDir)) {
       throw new Error(`[app-router-fs] Routes directory not found: ${routesDir}`)
     }
@@ -160,8 +190,11 @@ export class FileSystemRouter {
 
         processedRoutes.push({
           route: routePath,
-          layout: layoutFile,
-          filename: routeFilePath,
+          layout: layoutFile ? this.#safeLayoutFile(layoutFile) : null,
+          filename:
+            this.#isMdxFile(routeFilePath) && this.#mdxRendererFile !== undefined
+              ? this.#mdxRendererFile
+              : routeFilePath,
         })
       }
     }
@@ -169,7 +202,7 @@ export class FileSystemRouter {
     // If we found a layout file, create a layout route with all siblings
     if (layoutFile && layoutFile !== parentLayoutFile) {
       routes.push({
-        filename: layoutFile,
+        filename: this.#safeLayoutFile(layoutFile),
         isLayout: true,
         siblings: processedRoutes,
       })
@@ -200,10 +233,18 @@ export class FileSystemRouter {
   }
 }
 
-export function collectRoutes(
-  basePath: string = 'app/routes',
-  fileExts: string[] = ['.tsx', '.ts'],
-  cwd?: string,
-): RouteDefinition[] {
-  return new FileSystemRouter(fileExts, cwd).collectRoutes(basePath)
+export function collectRoutes(options?: FileSystemRouterOptions): RouteDefinition[] {
+  let _options = Object.assign(
+    {
+      routesDir: 'app/routes',
+      fileExtensions: ['.tsx', '.ts'],
+      projectRoot: process.cwd(),
+      ignoredPaths: [],
+      ignoredPathPrefix: '_',
+      mdxRendererFile: undefined,
+    } satisfies FileSystemRouterOptions,
+    options,
+  )
+
+  return new FileSystemRouter(_options).collectRoutes(_options.routesDir)
 }
