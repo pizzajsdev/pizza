@@ -1,7 +1,11 @@
 packages:
   - packages/*
+  - scripts
 
-onlyBuiltDependencies:
-  - '@tailwindcss/oxide'
-  - esbuild
-  - msw
+catalog:
+  '@react-router/dev': ^7.9.6
+  '@types/node': ^24.10.1
+  '@typescript/native-preview': 7.0.0-dev.20251129.1
+  typescript: ^5.9.3
+
+shellEmulator: true

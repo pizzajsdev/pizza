@@ -1,3 +1,9 @@
 {
-  "typescript.tsdk": "node_modules/typescript/lib"
+  "nodejs-testing.extensions": [
+    {
+      "extensions": ["ts", "tsx"],
+      "parameters": ["--import", "tsx"]
+    }
+  ],
+  "typescript.tsdk": "./node_modules/typescript/lib"
 }

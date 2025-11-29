@@ -1,0 +1,11 @@
+{
+  "name": "pizzajsdev-scripts",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@octokit/request": "^10.0.7",
+    "@types/node": "catalog:",
+    "@types/semver": "^7.7.1",
+    "semver": "^7.7.3"
+  }
+}

@@ -1,20 +1,3 @@
-# Ignore:
-build/
-dist/
-.next/
-.turbo/
-node_modules/
-coverage/
-.vercel/
-.react-router/
-
-package.json
-pnpm-*.yaml
-*.min.json
-
-.ignore/
+pnpm-lock.yaml
 .local/
-.dev/
-
-public/
-drizzle/
+node_modules/
