@@ -61,8 +61,8 @@ Cutting releases is a 2-step process:
 
 This repo includes a script for each step.
 
-To update versions and create a tag, use `pnpm run tag-release <packageName> <releaseType>`. For example, to create a
-`minor` release of the `route-collector` package, run:
+To update versions and create a tag, use `pnpm run tag-release <packageName> patch|minor|major`. For example, to create
+a `minor` release of the `route-collector` package, run:
 
 ```sh
 pnpm run tag-release route-collector minor

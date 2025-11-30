@@ -19,16 +19,20 @@
   ],
   "type": "module",
   "exports": {
+    ".": "./src/types.ts",
     "./indexed-db": "./src/indexed-db.ts",
     "./memory": "./src/memory.ts",
     "./redis": "./src/redis.ts",
     "./null": "./src/null.ts",
-    "./": "./src/types.ts",
     "./package.json": "./package.json"
   },
   "publishConfig": {
     "access": "public",
     "exports": {
+      ".": {
+        "types": "./dist/types.d.ts",
+        "default": "./dist/types.js"
+      },
       "./indexed-db": {
         "types": "./dist/indexed-db.d.ts",
         "default": "./dist/indexed-db.js"
@@ -44,10 +48,6 @@
       "./null": {
         "types": "./dist/null.d.ts",
         "default": "./dist/null.js"
-      },
-      "./": {
-        "types": "./dist/types.d.ts",
-        "default": "./dist/types.js"
       },
       "./package.json": "./package.json"
     }
