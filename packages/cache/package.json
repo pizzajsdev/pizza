@@ -1,6 +1,6 @@
 {
   "name": "@pizzajsdev/cache",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A framework-agnostic cache library that works with IndexedDB, Redis, in-memory, and more",
   "author": "Javier Aguilar",
   "license": "MIT",
