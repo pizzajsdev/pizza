@@ -1,0 +1,89 @@
+{
+  "name": "@pizzajsdev/cache",
+  "version": "0.1.0",
+  "description": "A framework-agnostic cache library that works with IndexedDB, Redis, in-memory, and more",
+  "author": "Javier Aguilar",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pizzajsdev/pizza.git",
+    "directory": "packages/cache"
+  },
+  "homepage": "https://github.com/pizzajsdev/pizza/tree/main/packages/cache#readme",
+  "files": [
+    "LICENSE",
+    "README.md",
+    "dist",
+    "src",
+    "!src/**/*.test.ts"
+  ],
+  "type": "module",
+  "exports": {
+    "./indexed-db": "./src/indexed-db.ts",
+    "./memory": "./src/memory.ts",
+    "./redis": "./src/redis.ts",
+    "./null": "./src/null.ts",
+    "./": "./src/types.ts",
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "exports": {
+      "./indexed-db": {
+        "types": "./dist/indexed-db.d.ts",
+        "default": "./dist/indexed-db.js"
+      },
+      "./memory": {
+        "types": "./dist/memory.d.ts",
+        "default": "./dist/memory.js"
+      },
+      "./redis": {
+        "types": "./dist/redis.d.ts",
+        "default": "./dist/redis.js"
+      },
+      "./null": {
+        "types": "./dist/null.d.ts",
+        "default": "./dist/null.js"
+      },
+      "./": {
+        "types": "./dist/types.d.ts",
+        "default": "./dist/types.js"
+      },
+      "./package.json": "./package.json"
+    }
+  },
+  "dependencies": {
+    "superjson": "^2.2.6"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "@typescript/native-preview": "catalog:",
+    "@upstash/redis": "^1.35.7",
+    "lru-cache": "^11.2.2",
+    "typescript": "catalog:"
+  },
+  "peerDependencies": {
+    "@upstash/redis": "^1",
+    "lru-cache": "^11"
+  },
+  "peerDependenciesMeta": {
+    "@upstash/redis": {
+      "optional": true
+    },
+    "lru-cache": {
+      "optional": true
+    }
+  },
+  "scripts": {
+    "build": "rm -rf dist && tsgo -p tsconfig.build.json",
+    "clean": "git clean -fdX",
+    "prepublishOnly": "pnpm run build",
+    "test": "node --disable-warning=ExperimentalWarning --test './src/**/*.test.ts'",
+    "typecheck": "tsgo --noEmit"
+  },
+  "keywords": [
+    "cache",
+    "redis",
+    "lru-cache",
+    "indexeddb"
+  ]
+}
