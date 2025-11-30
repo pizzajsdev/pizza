@@ -27,6 +27,7 @@
     "./package.json": "./package.json"
   },
   "publishConfig": {
+    "access": "public",
     "exports": {
       "./indexed-db": {
         "types": "./dist/indexed-db.d.ts",
